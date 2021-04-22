@@ -2,16 +2,14 @@ package com.omar;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.WindowConstants;
-import javax.swing.text.html.HTMLDocument.HTMLReader.FormAction;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ExplorerWindow extends JFrame implements ActionListener {
 
@@ -23,22 +21,30 @@ public class ExplorerWindow extends JFrame implements ActionListener {
         */
 
         Box box = new Box(BoxLayout.PAGE_AXIS);
-        JLabel usernameField = new JLabel("Patata");
-        box.add(usernameField);
+
+        getFolderFileList("C:\\", box);
 
         add(box);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(800, 800);
         setVisible(true);
-        getFolderFileList();
     }
 
-    public void getFolderFileList() {
+    public void getFolderFileList(String path, Box containerBox) {
         //how to ignore system files and folders ????
-        File rootPath = new File("C:\\");
-        for (String file : rootPath.list()) {
-            System.out.println(file);
+        File pathFolder = new File("C:\\");
+
+        if (!pathFolder.isDirectory()) {
+            //TODO: Launch exception
+        } else {
+            for (String file : pathFolder.list()) {
+                JButton testButton = new JButton(file);
+                testButton.setBackground(Color.red);
+                testButton.addActionListener(this);
+                containerBox.add(testButton);
+            }
         }
+
     }
 
     @Override
