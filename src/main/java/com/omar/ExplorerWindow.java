@@ -49,7 +49,10 @@ public class ExplorerWindow extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource() instanceof JButton) {
+            JButton sourceButton = (JButton) e.getSource();
+            System.out.println(sourceButton.getText());
+        }
     }
 
 }
